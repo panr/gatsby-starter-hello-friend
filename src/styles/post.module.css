@@ -1,0 +1,40 @@
+.post {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  padding: 40px 20px;
+  margin: 20px auto;
+
+  @media (--tablet) {
+    max-width: 660px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  img {
+    border-radius: 8px;
+  }
+}
+
+.coverImage {
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+}
+
+.meta {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.readMore {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+}

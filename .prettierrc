@@ -1,0 +1,25 @@
+{
+  "printWidth": 80,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.{css,scss}",
+      "options": {
+        "parser": "css"
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    },
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    }
+  ],
+  "parser": "babylon"
+}
