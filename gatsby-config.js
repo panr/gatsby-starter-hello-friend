@@ -1,17 +1,18 @@
 const postCssPresetEnv = require(`postcss-preset-env`)
 const postCSSNested = require('postcss-nested')
 
-module.exports = {
+module.exports = ({
+  logo,
+  logoText = 'hello friend',
+  defaultTheme = 'dark',
+}) => ({
   siteMetadata: {
     title: `Hello Friend`,
     description: `A simple theme for Gatsby. That's it.`,
     author: `@panr`,
-    logo: {
-      src: '',
-      alt: '',
-    },
-    logoText: 'hello friend',
-    defaultTheme: 'dark', // 'dark' or 'light'
+    logo,
+    logoText,
+    defaultTheme,
   },
   plugins: [
     `babel-preset-gatsby`,
@@ -74,4 +75,4 @@ module.exports = {
       },
     },
   ],
-}
+})
