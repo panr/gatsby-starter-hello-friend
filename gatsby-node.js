@@ -1,9 +1,11 @@
+const { paginate } = require('gatsby-awesome-pagination')
 const path = require('path')
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`src/templates/blogPost.js`)
+  const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`)
+  const indexTemplate = path.resolve(`./src/templates/index.js`)
 
   return graphql(`
     {
@@ -14,22 +16,38 @@ exports.createPages = ({ actions, graphql }) => {
         edges {
           node {
             frontmatter {
-              slug
+              path
             }
           }
         }
       }
     }
   `).then(result => {
+    const posts = result.data.allMarkdownRemark.edges
+
     if (result.errors) {
       return Promise.reject(result.errors)
     }
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    paginate({
+      createPage,
+      items: posts,
+      component: indexTemplate,
+      itemsPerPage: 5,
+      pathPrefix: '/',
+    })
+
+    posts.forEach(({ node }, index) => {
+      const previous = index === 0 ? null : posts[index - 1].node
+      const next = index === posts.length - 1 ? null : posts[index + 1].node
+
       createPage({
-        path: node.frontmatter.slug,
+        path: node.frontmatter.path,
         component: blogPostTemplate,
-        context: {}, // additional data can be passed via context
+        context: {
+          next,
+          previous,
+        },
       })
     })
   })

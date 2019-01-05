@@ -58,6 +58,10 @@
   line-height: 0;
 }
 
+.themeToggle {
+  outline: none;
+}
+
 @keyframes cursor {
   0% { opacity: 0; }
   50% { opacity: 1; }

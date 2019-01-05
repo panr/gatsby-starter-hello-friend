@@ -1,6 +1,6 @@
 ---
 title: "Hello Friend"
-slug: "/hello"
+path: "/hello"
 date: "1986-09-17"
 coverImage: ../images/hello.jpg
 author: "Elliot"

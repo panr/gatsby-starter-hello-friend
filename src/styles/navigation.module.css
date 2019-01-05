@@ -1,0 +1,53 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1024px;
+  max-width: 100%;
+  margin: 80px 0 40px;
+}
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-background-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  max-width: 40%;
+  cursor: pointer;
+  appearance: none;
+
+  :global .dark-theme :local & {
+    background: var(--dark-background-secondary);
+  }
+
+  + .button {
+    margin-left: 10px;
+  }
+
+  a {
+    display: flex;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &Text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.iconNext {
+  margin-left: 8px;
+}
+
+.iconPrev {
+  margin-right: 8px;
+}

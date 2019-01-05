@@ -4,8 +4,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Post from '../components/post'
 
-const BlogPostTemplate = ({ data }) => {
+const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
+  const nextPost = pageContext.next
+  const previousPost = pageContext.previous
 
   return (
     <Layout>
@@ -13,10 +15,12 @@ const BlogPostTemplate = ({ data }) => {
         key={post.id}
         title={post.frontmatter.title}
         date={post.frontmatter.date}
-        path={post.frontmatter.slug}
+        path={post.frontmatter.path}
         author={post.frontmatter.author}
-        coverImage={post.frontmatter.coverImage.childImageSharp.fluid}
+        coverImage={post.frontmatter.coverImage}
         html={post.html}
+        previousPost={previousPost}
+        nextPost={nextPost}
       />
     </Layout>
   )
@@ -25,16 +29,20 @@ const BlogPostTemplate = ({ data }) => {
 export default BlogPostTemplate
 
 BlogPostTemplate.propTypes = {
-  data: PropTypes.any,
+  data: PropTypes.object.isRequired,
+  pageContext: PropTypes.shape({
+    next: PropTypes.object,
+    previous: PropTypes.object,
+  }),
 }
 
 export const pageQuery = graphql`
-  query($slug: String) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+  query($path: String) {
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
       frontmatter {
         title
         date(formatString: "DD MMMM YYYY")
-        slug
+        path
         author
         excerpt
         coverImage {

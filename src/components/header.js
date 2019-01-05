@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import Icon from '../components/icon'
+import Icon from './icon'
 
 import style from '../styles/header.module.css'
 
@@ -13,14 +13,15 @@ class Header extends React.Component {
 
   onChangeTheme = this.onChangeTheme.bind(this)
 
-  onChangeTheme () {
-    const opositeTheme = this.state.theme === 'dark' ? 'light' : 'dark'
+  onChangeTheme() {
+    const { theme } = this.state
+    const opositeTheme = theme === 'dark' ? 'light' : 'dark'
 
     this.setState({ theme: opositeTheme })
     window.localStorage.setItem('theme', opositeTheme)
   }
 
-  render () {
+  render() {
     const { siteLogo, logoText, siteTitle } = this.props
     const { theme } = this.state
 
@@ -46,14 +47,15 @@ class Header extends React.Component {
               </div>
             </Link>
             <span className={style.right}>
-              <Icon
-                onClick={this.onChangeTheme}
-                style={{ cursor: 'pointer' }}
-                size={24}
-                d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+              <span className={style.themeToggle} onClick={this.onChangeTheme}>
+                <Icon
+                  style={{ cursor: 'pointer' }}
+                  size={24}
+                  d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
                   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
                   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-              />
+                />
+              </span>
             </span>
           </div>
         </header>
@@ -66,6 +68,7 @@ Header.propTypes = {
   siteTitle: PropTypes.string,
   siteLogo: PropTypes.object,
   logoText: PropTypes.string,
+  defaultTheme: PropTypes.string,
 }
 
 export default Header

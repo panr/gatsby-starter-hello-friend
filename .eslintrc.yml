@@ -1,0 +1,65 @@
+---
+
+env:
+  es6: true
+  jest: true
+  jquery: true
+  browser: true
+  node: true
+
+parser: babel-eslint
+
+extends:
+  - airbnb
+  - prettier
+
+rules:
+  # best practices
+  arrow-parens:
+    - 2
+    - as-needed
+  camelcase:
+    - 0
+  max-len:
+    - 2
+    - code: 100
+  semi:
+    - 2
+    - never
+  class-methods-use-this: 0
+  comma-dangle:
+    - 2
+    - always-multiline
+  no-console:
+    - 2
+  no-unused-expressions: 0
+  no-param-reassign:
+    - 2
+    - props: false
+  no-useless-escape: 0
+  no-restricted-globals: 0
+  func-names: 0
+  quotes:
+    - 2
+    - single
+    - allowTemplateLiterals: true
+  no-underscore-dangle: 0
+  import/no-unresolved: 0
+  import/extensions: 0
+  import/no-extraneous-dependencies: 0
+  import/prefer-default-export: 0
+  object-curly-newline: 0
+
+  react/jsx-filename-extension: 0
+  react/jsx-one-expression-per-line: 0
+  react/forbid-prop-types: 0
+  react/require-default-props: 0
+  react/no-array-index-key: 0
+  react/no-unescaped-entities: 0
+  react/destructuring-assignment: 0
+  jsx-a11y/click-events-have-key-events: 0
+  jsx-a11y/no-static-element-interactions: 0
+
+globals:
+  document: true
+  requestAnimationFrame: true
