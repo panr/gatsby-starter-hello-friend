@@ -76,11 +76,15 @@
   }
 
   &Trigger {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
     margin-right: 10px;
     padding: 0;
+    line-height: 0;
+    background: none;
+    color: inherit;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
     cursor: pointer;
   }
 
