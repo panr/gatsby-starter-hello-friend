@@ -55,11 +55,97 @@
 }
 
 .right {
-  line-height: 0;
+  display: flex;
+  position: relative;
+}
+
+.menu {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  list-style: none;
+  border-right: 1px solid;
+  margin-right: 18px;
+
+  li {
+    margin: 0 12px;
+  }
+
+  &Trigger {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-right: 10px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  a {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: none;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fafafa;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+  border-radius: 5px;
+  z-index: 99;
+
+  :global .dark-theme :local & {
+    background: #252627;
+  }
+
+  li {
+    margin: 0;
+
+    a {
+      display: block;
+      padding: 10px 15px;
+    }
+  }
+
+  &Overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .2);
+    z-index: 10;
+  }
 }
 
 .themeToggle {
+  background: none;
+  color: inherit;
+  border: none;
+  box-shadow: none;
+  line-height: 0;
+  padding: 0 5px;
+  appearance: none;
   outline: none;
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes cursor {

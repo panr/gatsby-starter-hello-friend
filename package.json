@@ -1,14 +1,17 @@
 {
-  "name": "gatsby-theme-hello-friend",
+  "name": "gatsby-starter-hello-friend",
   "private": true,
-  "description": "A simple theme for Gatsby. That's it.",
+  "description": "A simple starter for Gatsby. That's it.",
   "version": "0.1.0",
   "author": "Radek Kozieł <radoslaw.koziel@gmail.com>",
   "keywords": [
     "gatsby",
     "minimal",
-    "theme",
+    "starter",
     "blog",
+    "theme",
+    "dark",
+    "light",
     "personal site"
   ],
   "license": "MIT",
@@ -48,15 +51,17 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
+    "gatsby-remark-embed-video": "^1.7.0",
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
-    "prettier": "^1.15.2"
+    "prettier": "^1.15.2",
+    "react-responsive": "^6.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/panr/gatsby-theme-hello-friend"
+    "url": "https://github.com/panr/gatsby-starter-hello-friend"
   },
   "bugs": {
-    "url": "https://github.com/panr/gatsby-theme-hello-friend/issues"
+    "url": "https://github.com/panr/gatsby-starter-hello-friend/issues"
   }
 }

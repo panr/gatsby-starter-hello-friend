@@ -39,6 +39,7 @@ Index.propTypes = {
 export const blogListQuery = graphql`
   query($limit: Int!, $skip: Int!) {
     allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "//posts//" } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip

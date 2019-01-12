@@ -17,6 +17,8 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             frontmatter {
               path
+              title
+              type
             }
           }
         }
@@ -40,15 +42,21 @@ exports.createPages = ({ actions, graphql }) => {
     posts.forEach(({ node }, index) => {
       const previous = index === 0 ? null : posts[index - 1].node
       const next = index === posts.length - 1 ? null : posts[index + 1].node
+      const isNextSameType =
+        node.frontmatter.type === (next && next.frontmatter.type)
+      const isPreviousSameType =
+        node.frontmatter.type === (previous && previous.frontmatter.type)
 
       createPage({
         path: node.frontmatter.path,
         component: blogPostTemplate,
         context: {
-          next,
-          previous,
+          next: isNextSameType ? next : null,
+          previous: isPreviousSameType ? previous : null,
         },
       })
     })
+
+    return posts
   })
 }

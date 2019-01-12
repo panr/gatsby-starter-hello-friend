@@ -59,6 +59,10 @@ const Layout = ({ children }) => (
               }
               logoText
               defaultTheme
+              mainMenu {
+                title
+                path
+              }
             }
           }
         }
@@ -70,6 +74,7 @@ const Layout = ({ children }) => (
             siteLogo={data.site.siteMetadata.logo}
             logoText={data.site.siteMetadata.logoText}
             defaultTheme={data.site.siteMetadata.defaultTheme}
+            mainMenu={data.site.siteMetadata.mainMenu}
           />
           <div className="content">{children}</div>
           <footer>

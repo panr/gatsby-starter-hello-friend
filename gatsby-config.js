@@ -4,7 +4,7 @@ const postCSSNested = require('postcss-nested')
 module.exports = {
   siteMetadata: {
     title: `Hello Friend`,
-    description: `A simple theme for Gatsby. That's it.`,
+    description: `A simple starter for Gatsby. That's it.`,
     author: `@panr`,
     logo: {
       src: '',
@@ -12,6 +12,16 @@ module.exports = {
     },
     logoText: 'hello friend',
     defaultTheme: 'dark',
+    mainMenu: [
+      {
+        title: 'About',
+        path: '/about',
+      },
+      {
+        title: 'Showcase',
+        path: '/showcase',
+      },
+    ],
   },
   plugins: [
     `babel-preset-gatsby`,
@@ -20,14 +30,21 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${ __dirname }/src/images`,
+        path: `${__dirname}/src/images`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `src`,
-        path: `${ __dirname }/src/`,
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
       },
     },
     {
@@ -42,6 +59,13 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: 'gatsby-remark-embed-video',
+            options: {
+              related: false,
+              noIframeBorder: true,
+            },
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -65,7 +89,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-theme-hello-friend`,
+        name: `gatsby-starter-hello-friend`,
         short_name: `hello-friend`,
         start_url: `/`,
         background_color: `#292a2d`,
