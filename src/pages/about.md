@@ -19,6 +19,6 @@ The starter includes:
 - **light/dark mode**, depending on your preferences
 - great reading experience thanks to [**Inter UI font**](https://rsms.me/inter/), made by [Rasmus Andersson](https://rsms.me/about/)
 - nice code highlighting thanks to [**PrismJS**](https://prismjs.com)
-- an easy way to modify the starter (**Webpack, NodeJS, PostCSS** — initial setup created by [Marcin Dziewulski](http://www.mobily.pl))
+- responsive youtube/vimeo etc. videos [gatsby-remark-embed-video](https://github.com/borgfriend/gatsby-remark-embed-video)
 
 So, there you have it... enjoy!
