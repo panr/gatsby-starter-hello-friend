@@ -79,7 +79,7 @@ const Layout = ({ children }) => (
           <div className="content">{children}</div>
           <footer>
             © 2019 Built with <a href="https://www.gatsbyjs.org">Gatsby</a> |
-            Theme created by <a href="https://radoslawkoziel.pl">panr</a>
+            Starter created by <a href="https://radoslawkoziel.pl">panr</a>
           </footer>
         </div>
       )}
