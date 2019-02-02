@@ -8,12 +8,40 @@ import Icon from './icon'
 
 import style from '../styles/header.module.css'
 
-const MainMenu = ({ mainMenu }) =>
-  mainMenu.map((menuItem, index) => (
+const MainMenu = ({ mainMenu, mainMenuItems, isMobileMenu }) => {
+  const menu = mainMenu.slice(0)
+  !isMobileMenu && menu.splice(mainMenuItems)
+
+  return menu.map((menuItem, index) => (
     <li key={index}>
       <Link to={menuItem.path}>{menuItem.title}</Link>
     </li>
   ))
+}
+
+const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu }) => {
+  const menu = mainMenu.slice(0)
+  menu.splice(0, mainMenuItems)
+
+  const items = menu.map((menuItem, index) => (
+    <li key={index}>
+      <Link to={menuItem.path}>{menuItem.title}</Link>
+    </li>
+  ))
+
+  return (
+    <>
+      {items}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+      <div
+        className={style.subMenuOverlay}
+        role="button"
+        tabIndex={0}
+        onClick={onToggleSubMenu}
+      />
+    </>
+  )
+}
 
 class Header extends React.Component {
   state = {
@@ -21,11 +49,14 @@ class Header extends React.Component {
       (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
       this.props.defaultTheme,
     isMobileMenuVisible: false,
+    isSubMenuVisible: false,
   }
 
   onChangeTheme = this.onChangeTheme.bind(this)
 
   onToggleMobileMenu = this.onToggleMobileMenu.bind(this)
+
+  onToggleSubMenu = this.onToggleSubMenu.bind(this)
 
   onChangeTheme() {
     const { theme } = this.state
@@ -41,9 +72,22 @@ class Header extends React.Component {
     this.setState({ isMobileMenuVisible: !isMobileMenuVisible })
   }
 
+  onToggleSubMenu() {
+    const { isSubMenuVisible } = this.state
+    this.setState({ isSubMenuVisible: !isSubMenuVisible })
+  }
+
   render() {
-    const { siteLogo, logoText, siteTitle, mainMenu } = this.props
-    const { theme } = this.state
+    const {
+      siteLogo,
+      logoText,
+      siteTitle,
+      mainMenu,
+      mainMenuItems,
+      menuMoreText,
+    } = this.props
+    const { theme, isSubMenuVisible, isMobileMenuVisible } = this.state
+    const isSubMenu = !(mainMenuItems >= mainMenu.length) && mainMenuItems > 0
 
     return (
       <>
@@ -72,7 +116,7 @@ class Header extends React.Component {
                   if (matches) {
                     return (
                       <>
-                        {this.state.isMobileMenuVisible ? (
+                        {isMobileMenuVisible ? (
                           <>
                             {/* eslint-disable */}
                             <div
@@ -81,7 +125,7 @@ class Header extends React.Component {
                             />
                             {/* eslint-enable */}
                             <ul className={style.mobileMenu}>
-                              <MainMenu mainMenu={mainMenu} />
+                              <MainMenu mainMenu={mainMenu} isMobileMenu />
                             </ul>
                           </>
                         ) : null}
@@ -103,7 +147,31 @@ class Header extends React.Component {
 
                   return (
                     <ul className={style.menu}>
-                      <MainMenu mainMenu={mainMenu} />
+                      <MainMenu
+                        mainMenu={mainMenu}
+                        mainMenuItems={mainMenuItems}
+                      />
+                      {isSubMenu ? (
+                        <>
+                          <button
+                            className={style.subMenuTrigger}
+                            onClick={this.onToggleSubMenu}
+                            type="button"
+                          >
+                            {menuMoreText || 'Menu'}{' '}
+                            <span className={style.menuArrow}>></span>
+                          </button>
+                          {isSubMenuVisible ? (
+                            <ul className={style.subMenu}>
+                              <SubMenu
+                                mainMenu={mainMenu}
+                                mainMenuItems={mainMenuItems}
+                                onToggleSubMenu={this.onToggleSubMenu}
+                              />
+                            </ul>
+                          ) : null}
+                        </>
+                      ) : null}
                     </ul>
                   )
                 }}
@@ -140,6 +208,19 @@ Header.propTypes = {
       path: PropTypes.string,
     }),
   ),
+  mainMenuItems: PropTypes.number,
+  menuMoreText: PropTypes.string,
+}
+
+SubMenu.propTypes = {
+  mainMenu: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      path: PropTypes.string,
+    }),
+  ),
+  mainMenuItems: PropTypes.number,
+  onToggleSubMenu: PropTypes.func,
 }
 
 export default Header

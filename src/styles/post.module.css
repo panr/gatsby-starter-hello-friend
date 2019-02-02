@@ -2,8 +2,16 @@
   width: 100%;
   max-width: 800px;
   text-align: left;
-  padding: 40px 20px;
+  padding: 20px;
   margin: 20px auto;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--light-border-color);
+
+    :global .dark-theme :local & {
+      border-color: var(--dark-border-color);
+    }
+  }
 
   @media (--tablet) {
     max-width: 660px;
@@ -14,7 +22,7 @@
   }
 
   h1 {
-    margin-top: 0;
+    margin: 0 0 10px;
   }
 
   img {
@@ -34,8 +42,10 @@
 }
 
 .readMore {
+  display: inline-block;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: bold;
+  margin: 20px 0;
   font-size: 1rem;
 }
 

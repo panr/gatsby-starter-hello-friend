@@ -5,6 +5,7 @@ module.exports = {
   siteMetadata: {
     title: `Hello Friend`,
     description: `A simple starter for Gatsby. That's it.`,
+    copyrights: '',
     author: `@panr`,
     logo: {
       src: '',
@@ -12,6 +13,7 @@ module.exports = {
     },
     logoText: 'hello friend',
     defaultTheme: 'dark',
+    postsPerPage: 2,
     mainMenu: [
       {
         title: 'About',
@@ -21,7 +23,13 @@ module.exports = {
         title: 'Showcase',
         path: '/showcase',
       },
+      {
+        title: 'Hello Friend',
+        path: '/hi',
+      },
     ],
+    showMenuItems: 2,
+    menuMoreText: 'Menu',
   },
   plugins: [
     `babel-preset-gatsby`,

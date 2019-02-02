@@ -6,6 +6,7 @@ import style from '../styles/navigation.module.css'
 
 const Navigation = ({ nextPath, previousPath, nextLabel, previousLabel }) => (
   <div className={style.navigation}>
+    {console.log(previousPath, nextPath)}
     {previousPath && (
       <span className={style.button}>
         <Link to={previousPath}>

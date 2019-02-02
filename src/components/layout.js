@@ -59,10 +59,13 @@ const Layout = ({ children }) => (
               }
               logoText
               defaultTheme
+              copyrights
               mainMenu {
                 title
                 path
               }
+              showMenuItems
+              menuMoreText
             }
           }
         }
@@ -75,11 +78,25 @@ const Layout = ({ children }) => (
             logoText={data.site.siteMetadata.logoText}
             defaultTheme={data.site.siteMetadata.defaultTheme}
             mainMenu={data.site.siteMetadata.mainMenu}
+            mainMenuItems={data.site.siteMetadata.showMenuItems}
+            menuMoreText={data.site.siteMetadata.menuMoreText}
           />
           <div className="content">{children}</div>
           <footer>
-            © 2019 Built with <a href="https://www.gatsbyjs.org">Gatsby</a> |
-            Starter created by <a href="https://radoslawkoziel.pl">panr</a>
+            {data.site.siteMetadata.copyrights ? (
+              data.site.siteMetadata.copyrights
+            ) : (
+              <>
+                <span className="footerCopyrights">
+                  © 2019 Built with{' '}
+                  <a href="https://www.gatsbyjs.org">Gatsby</a>
+                </span>
+                <span className="footerCopyrights">
+                  Starter created by{' '}
+                  <a href="https://radoslawkoziel.pl">panr</a>
+                </span>
+              </>
+            )}
           </footer>
         </div>
       )}

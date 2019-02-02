@@ -4,13 +4,13 @@ const path = require('path')
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`)
+  const pageTemplate = path.resolve(`./src/templates/page.js`)
   const indexTemplate = path.resolve(`./src/templates/index.js`)
 
   return graphql(`
     {
       allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
+        sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {
         edges {
@@ -23,9 +23,32 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
+      site {
+        siteMetadata {
+          postsPerPage
+        }
+      }
     }
   `).then(result => {
-    const posts = result.data.allMarkdownRemark.edges
+    const {
+      allMarkdownRemark,
+      site: { siteMetadata },
+    } = result.data
+    const pages = allMarkdownRemark.edges
+    const sortedPages = pages.sort(
+      (
+        {
+          node: {
+            frontmatter: { type: typeA },
+          },
+        },
+        {
+          node: {
+            frontmatter: { type: typeB },
+          },
+        },
+      ) => (typeA > typeB) - (typeA < typeB),
+    )
 
     if (result.errors) {
       return Promise.reject(result.errors)
@@ -33,15 +56,16 @@ exports.createPages = ({ actions, graphql }) => {
 
     paginate({
       createPage,
-      items: posts,
+      items: sortedPages.filter(edge => edge.node.frontmatter.type === 'post'),
       component: indexTemplate,
-      itemsPerPage: 5,
+      itemsPerPage: siteMetadata.postsPerPage,
       pathPrefix: '/',
     })
 
-    posts.forEach(({ node }, index) => {
-      const previous = index === 0 ? null : posts[index - 1].node
-      const next = index === posts.length - 1 ? null : posts[index + 1].node
+    sortedPages.forEach(({ node }, index) => {
+      const previous = index === 0 ? null : sortedPages[index - 1].node
+      const next =
+        index === sortedPages.length - 1 ? null : sortedPages[index + 1].node
       const isNextSameType =
         node.frontmatter.type === (next && next.frontmatter.type)
       const isPreviousSameType =
@@ -49,7 +73,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       createPage({
         path: node.frontmatter.path,
-        component: blogPostTemplate,
+        component: pageTemplate,
         context: {
           next: isNextSameType ? next : null,
           previous: isPreviousSameType ? previous : null,
@@ -57,6 +81,6 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    return posts
+    return sortedPages
   })
 }

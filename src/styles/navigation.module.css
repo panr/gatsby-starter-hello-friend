@@ -14,7 +14,7 @@
   justify-content: center;
   background: var(--light-background-secondary);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: bold;
   border-radius: 8px;
   max-width: 40%;
   cursor: pointer;

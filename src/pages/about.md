@@ -1,6 +1,6 @@
 ---
 title: "About"
-date: "2018-07-18"
+date: "2018-07-19"
 type: "page"
 author: "Radek"
 path: "/about"
