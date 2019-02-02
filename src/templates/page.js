@@ -5,20 +5,24 @@ import Layout from '../components/layout'
 import Post from '../components/post'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-  const post = data.markdownRemark
+  const {
+    frontmatter: { title, date, path, author, coverImage },
+    id,
+    html,
+  } = data.markdownRemark
   const nextPost = pageContext.next
   const previousPost = pageContext.previous
 
   return (
     <Layout>
       <Post
-        key={post.id}
-        title={post.frontmatter.title}
-        date={post.frontmatter.date}
-        path={post.frontmatter.path}
-        author={post.frontmatter.author}
-        coverImage={post.frontmatter.coverImage}
-        html={post.html}
+        key={id}
+        title={title}
+        date={date}
+        path={path}
+        author={author}
+        coverImage={coverImage}
+        html={html}
         previousPost={previousPost}
         nextPost={nextPost}
       />

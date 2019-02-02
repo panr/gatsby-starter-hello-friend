@@ -20,6 +20,18 @@ exports.createPages = ({ actions, graphql }) => {
               title
               type
             }
+            fileAbsolutePath
+          }
+        }
+      }
+      allFile(filter: { sourceInstanceName: { eq: "posts" } }) {
+        edges {
+          node {
+            childMarkdownRemark {
+              frontmatter {
+                title
+              }
+            }
           }
         }
       }
@@ -32,6 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
   `).then(result => {
     const {
       allMarkdownRemark,
+      allFile: { edges: posts },
       site: { siteMetadata },
     } = result.data
     const pages = allMarkdownRemark.edges
@@ -56,25 +69,28 @@ exports.createPages = ({ actions, graphql }) => {
 
     paginate({
       createPage,
-      items: sortedPages.filter(edge => edge.node.frontmatter.type === 'post'),
+      items: posts,
       component: indexTemplate,
       itemsPerPage: siteMetadata.postsPerPage,
       pathPrefix: '/',
     })
 
     sortedPages.forEach(({ node }, index) => {
+      const pageTypeRegex = /src\/(.*?)\//
+      const getType = el => el.fileAbsolutePath.match(pageTypeRegex)[1]
+
       const previous = index === 0 ? null : sortedPages[index - 1].node
       const next =
         index === sortedPages.length - 1 ? null : sortedPages[index + 1].node
-      const isNextSameType =
-        node.frontmatter.type === (next && next.frontmatter.type)
+      const isNextSameType = getType(node) === (next && getType(next))
       const isPreviousSameType =
-        node.frontmatter.type === (previous && previous.frontmatter.type)
+        getType(node) === (previous && getType(previous))
 
       createPage({
         path: node.frontmatter.path,
         component: pageTemplate,
         context: {
+          type: getType(node),
           next: isNextSameType ? next : null,
           previous: isPreviousSameType ? previous : null,
         },
