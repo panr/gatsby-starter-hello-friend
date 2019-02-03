@@ -45,7 +45,9 @@ const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu }) => {
 
 class Header extends React.Component {
   state = {
-    userTheme: null,
+    userTheme:
+      (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
+      null,
     isMobileMenuVisible: false,
     isSubMenuVisible: false,
   }
@@ -55,14 +57,6 @@ class Header extends React.Component {
   onToggleMobileMenu = this.onToggleMobileMenu.bind(this)
 
   onToggleSubMenu = this.onToggleSubMenu.bind(this)
-
-  componentDidMount() {
-    const userTheme =
-      (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
-      null
-
-    this.setState({ userTheme })
-  }
 
   onChangeTheme() {
     const { userTheme } = this.state

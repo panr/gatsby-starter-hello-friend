@@ -243,10 +243,11 @@ button, input, textarea {
 .content {
   display: flex;
   flex-direction: column;
-  flex: 1 auto;
+  flex: 1 0 auto;
   align-items: center;
   justify-content: center;
   margin: 50px auto;
+  width: 100%;
 
   @media (--phone) {
     margin-top: 0;
@@ -293,11 +294,22 @@ footer {
   text-align: center;
   margin-bottom: 50px;
 
+  @media (--phone) {
+    display: flex;
+    flex-direction: column;
+  }
+
   .footerCopyrights {
     &:not(:first-of-type) {
       margin-left: 20px;
       padding-left: 20px;
       border-left: 1px solid;
+
+      @media (--phone) {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
     }
   }
 }
