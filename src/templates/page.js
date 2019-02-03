@@ -10,8 +10,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     id,
     html,
   } = data.markdownRemark
-  const nextPost = pageContext.next
-  const previousPost = pageContext.previous
+  const { next, previous } = pageContext
 
   return (
     <Layout>
@@ -23,8 +22,8 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         author={author}
         coverImage={coverImage}
         html={html}
-        previousPost={previousPost}
-        nextPost={nextPost}
+        previousPost={previous}
+        nextPost={next}
       />
     </Layout>
   )

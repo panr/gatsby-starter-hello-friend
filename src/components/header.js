@@ -45,9 +45,7 @@ const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu }) => {
 
 class Header extends React.Component {
   state = {
-    theme:
-      (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
-      this.props.defaultTheme,
+    userTheme: null,
     isMobileMenuVisible: false,
     isSubMenuVisible: false,
   }
@@ -58,11 +56,20 @@ class Header extends React.Component {
 
   onToggleSubMenu = this.onToggleSubMenu.bind(this)
 
-  onChangeTheme() {
-    const { theme } = this.state
-    const opositeTheme = theme === 'dark' ? 'light' : 'dark'
+  componentDidMount() {
+    const userTheme =
+      (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
+      null
 
-    this.setState({ theme: opositeTheme })
+    this.setState({ userTheme })
+  }
+
+  onChangeTheme() {
+    const { userTheme } = this.state
+    const opositeTheme =
+      userTheme === 'dark' || userTheme === null ? 'light' : 'dark'
+
+    this.setState({ userTheme: opositeTheme })
     typeof window !== 'undefined' &&
       window.localStorage.setItem('theme', opositeTheme)
   }
@@ -85,15 +92,20 @@ class Header extends React.Component {
       mainMenu,
       mainMenuItems,
       menuMoreText,
+      theme,
     } = this.props
-    const { theme, isSubMenuVisible, isMobileMenuVisible } = this.state
+    const { userTheme, isSubMenuVisible, isMobileMenuVisible } = this.state
     const isSubMenu = !(mainMenuItems >= mainMenu.length) && mainMenuItems > 0
 
     return (
       <>
         <Helmet>
           <title>{siteTitle}</title>
-          <body className={theme === 'dark' ? 'dark-theme' : 'light-theme'} />
+          <body
+            className={
+              (userTheme || theme) === 'light' ? 'light-theme' : 'dark-theme'
+            }
+          />
         </Helmet>
         <header className={style.header}>
           <div className={style.inner}>
@@ -201,7 +213,7 @@ Header.propTypes = {
   siteTitle: PropTypes.string,
   siteLogo: PropTypes.object,
   logoText: PropTypes.string,
-  defaultTheme: PropTypes.string,
+  theme: PropTypes.string,
   mainMenu: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,

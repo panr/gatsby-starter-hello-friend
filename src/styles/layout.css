@@ -246,10 +246,14 @@ button, input, textarea {
   flex: 1 auto;
   align-items: center;
   justify-content: center;
-  margin: 50px 0;
+  margin: 50px auto;
 
   @media (--phone) {
     margin-top: 0;
+  }
+
+  @media (--tablet) {
+    max-width: 660px;
   }
 }
 
