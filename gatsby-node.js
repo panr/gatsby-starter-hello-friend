@@ -18,13 +18,12 @@ exports.createPages = ({ actions, graphql }) => {
             frontmatter {
               path
               title
-              type
             }
             fileAbsolutePath
           }
         }
       }
-      allFile(filter: { sourceInstanceName: { eq: "posts" } }) {
+      posts: allFile(filter: { sourceInstanceName: { eq: "posts" } }) {
         edges {
           node {
             childMarkdownRemark {
@@ -43,12 +42,11 @@ exports.createPages = ({ actions, graphql }) => {
     }
   `).then(result => {
     const {
-      allMarkdownRemark,
-      allFile: { edges: posts },
+      allMarkdownRemark: { edges: markdownPages },
+      posts: { edges: posts },
       site: { siteMetadata },
     } = result.data
-    const pages = allMarkdownRemark.edges
-    const sortedPages = pages.sort(
+    const sortedPages = markdownPages.sort(
       (
         {
           node: {

@@ -1,8 +1,7 @@
 ---
 title: "Hello Friend"
 path: "/hello"
-type: "post"
-date: "1986-09-17"
+date: "2019-01-17"
 coverImage: ../images/hello.jpg
 author: "Elliot"
 excerpt: "\"Hello, friend?\" That's lame. Maybe I should give you a name..."

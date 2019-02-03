@@ -1,7 +1,6 @@
 ---
 title: "Showcase"
 date: "2018-07-17"
-type: "page"
 author: "Hello Robot"
 path: "/showcase"
 ---

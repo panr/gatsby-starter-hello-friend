@@ -13,7 +13,9 @@ module.exports = {
     },
     logoText: 'hello friend',
     defaultTheme: 'dark',
-    postsPerPage: 2,
+    postsPerPage: 5,
+    showMenuItems: 2,
+    menuMoreText: 'Show more',
     mainMenu: [
       {
         title: 'About',
@@ -24,12 +26,10 @@ module.exports = {
         path: '/showcase',
       },
       {
-        title: 'Hello Friend',
-        path: '/hi',
+        title: 'Example',
+        path: '/example',
       },
     ],
-    showMenuItems: 2,
-    menuMoreText: 'Menu',
   },
   plugins: [
     `babel-preset-gatsby`,

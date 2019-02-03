@@ -5,28 +5,42 @@ import Layout from '../components/layout'
 import Post from '../components/post'
 import Navigation from '../components/navigation'
 
-const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => (
-  <Layout>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
-      <Post
-        key={node.id}
-        title={node.frontmatter.title}
-        date={node.frontmatter.date}
-        path={node.frontmatter.path}
-        author={node.frontmatter.author}
-        coverImage={node.frontmatter.coverImage}
-        excerpt={node.frontmatter.excerpt || node.excerpt}
-      />
-    ))}
+const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
+  const {
+    allMarkdownRemark: { edges: posts },
+  } = data
 
-    <Navigation
-      previousPath={previousPagePath}
-      previousLabel="Newer posts"
-      nextPath={nextPagePath}
-      nextLabel="Older posts"
-    />
-  </Layout>
-)
+  return (
+    <Layout>
+      {posts.map(({ node }) => {
+        const {
+          id,
+          excerpt: autoExcerpt,
+          frontmatter: { title, date, path, author, coverImage, excerpt },
+        } = node
+
+        return (
+          <Post
+            key={id}
+            title={title}
+            date={date}
+            path={path}
+            author={author}
+            coverImage={coverImage}
+            excerpt={excerpt || autoExcerpt}
+          />
+        )
+      })}
+
+      <Navigation
+        previousPath={previousPagePath}
+        previousLabel="Newer posts"
+        nextPath={nextPagePath}
+        nextLabel="Older posts"
+      />
+    </Layout>
+  )
+}
 
 Index.propTypes = {
   data: PropTypes.object.isRequired,
@@ -36,7 +50,7 @@ Index.propTypes = {
   }),
 }
 
-export const blogListQuery = graphql`
+export const postsQuery = graphql`
   query($limit: Int!, $skip: Int!) {
     allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "//posts//" } }
@@ -47,6 +61,7 @@ export const blogListQuery = graphql`
       edges {
         node {
           id
+          excerpt
           frontmatter {
             title
             date(formatString: "DD MMMM YYYY")
@@ -61,7 +76,6 @@ export const blogListQuery = graphql`
               }
             }
           }
-          excerpt
         }
       }
     }
