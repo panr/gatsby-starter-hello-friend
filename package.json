@@ -45,6 +45,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-preset-gatsby": "^0.1.6",
+    "cssnano": "^4.1.8",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -52,10 +53,13 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
     "gatsby-remark-embed-video": "^1.7.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-mixins": "^6.2.1",
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
-    "prettier": "^1.15.2",
-    "react-responsive": "^6.0.1"
+    "postcss-url": "^8.0.0",
+    "prettier": "^1.15.2"
   },
   "repository": {
     "type": "git",

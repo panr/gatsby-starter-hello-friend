@@ -1,5 +1,9 @@
 const postCssPresetEnv = require(`postcss-preset-env`)
 const postCSSNested = require('postcss-nested')
+const postCSSUrl = require('postcss-url')
+const postCSSImports = require('postcss-import')
+const cssnano = require('cssnano')
+const postCSSMixins = require('postcss-mixins')
 
 module.exports = {
   siteMetadata: {
@@ -58,7 +62,20 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss`,
       options: {
-        postCssPlugins: [postCssPresetEnv({ stage: 1 }), postCSSNested()],
+        postCssPlugins: [
+          postCSSUrl(),
+          postCSSImports(),
+          postCSSMixins(),
+          postCSSNested(),
+          postCssPresetEnv({
+            importFrom: 'src/styles/variables.css',
+            stage: 1,
+            preserve: false,
+          }),
+          cssnano({
+            preset: 'default',
+          }),
+        ],
       },
     },
     `gatsby-transformer-sharp`,

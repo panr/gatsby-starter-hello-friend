@@ -16,50 +16,50 @@ Backup two-step verification breach, anonymous terminal traffic worm virus reboo
 Brute-force intercepting traffic fiber connection system boot up fsociety reboot AFK sys admin. Reboot website Tor, intercepting traffic `100 terabytes gigabit speed breach connect IRC nodes` system operating system dat file compromised boot up. Data center decrypt password network disconnect. Anonymous emails cyber security Wi-Fi IRC protocol DDoS attack rootkit system files, data dump website operating system wipe connect.
 
 ```css
-  /* PostCSS code by PrismJS */
+/* PostCSS code by PrismJS */
 
-  pre {
-    background: #1a1a1d;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    overflow: auto;
+pre {
+  background: #1a1a1d;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  overflow: auto;
 
-    @media (--phone) {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
+  @media (--phone) {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 
-    code {
-      background: none !important;
-      color: #ccc;
-      padding: 0;
-      font-size: inherit;
+  code {
+    background: none !important;
+    color: #ccc;
+    padding: 0;
+    font-size: inherit;
 
-      .dark-theme & {
-        color: inherit;
-      }
+    .dark-theme & {
+      color: inherit;
     }
   }
+}
 ```
 
 ```js
-  // JS code by PrismJS
+// JS code by PrismJS
 
-  const menuTrigger = document.querySelector('.menu-trigger')
-  const menu = document.querySelector('.menu')
-  const mobileQuery = getComputedStyle(document.body).getPropertyValue('--phoneWidth')
-  const isMobile = () => window.matchMedia(mobileQuery).matches
-  const isMobileMenu = () => {
-    menuTrigger.classList.toggle('hidden', !isMobile())
-    menu.classList.toggle('hidden', isMobile())
-  }
+const menuTrigger = document.querySelector('.menu-trigger')
+const menu = document.querySelector('.menu')
+const mobileQuery = getComputedStyle(document.body).getPropertyValue('--phoneWidth')
+const isMobile = () => window.matchMedia(mobileQuery).matches
+const isMobileMenu = () => {
+  menuTrigger.classList.toggle('hidden', !isMobile())
+  menu.classList.toggle('hidden', isMobile())
+}
 
-  isMobileMenu()
+isMobileMenu()
 
-  menuTrigger.addEventListener('click', () => menu.classList.toggle('hidden'))
+menuTrigger.addEventListener('click', () => menu.classList.toggle('hidden'))
 
-  window.addEventListener('resize', isMobileMenu)
+window.addEventListener('resize', isMobileMenu)
 ```
 
 ```html
