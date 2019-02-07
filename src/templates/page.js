@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Post from '../components/post'
+import SEO from '../components/seo'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const {
@@ -11,9 +12,11 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     html,
   } = data.markdownRemark
   const { next, previous } = pageContext
+  const post = data.markdownRemark
 
   return (
     <Layout>
+    <SEO title={post.frontmatter.title} meta={post.excerpt} />
       <Post
         key={id}
         title={title}

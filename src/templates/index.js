@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Post from '../components/post'
 import Navigation from '../components/navigation'
+import SEO from '../components/seo'
 
 const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
   const {
@@ -12,6 +13,7 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
 
   return (
     <Layout>
+    <SEO title="All posts" />
       {posts.map(({ node }) => {
         const {
           id,
