@@ -24,8 +24,10 @@ class Header extends React.Component {
 
   onChangeTheme() {
     const { userTheme } = this.state
+    const { defaultTheme } = this.props
+
     const opositeTheme =
-      userTheme === 'dark' || userTheme === null ? 'light' : 'dark'
+      (userTheme || defaultTheme) === 'light' ? 'dark' : 'light'
 
     this.setState({ userTheme: opositeTheme })
     typeof window !== 'undefined' &&
@@ -50,7 +52,7 @@ class Header extends React.Component {
       mainMenu,
       mainMenuItems,
       menuMoreText,
-      theme,
+      defaultTheme,
     } = this.props
     const { userTheme, isSubMenuVisible, isMobileMenuVisible } = this.state
 
@@ -60,7 +62,9 @@ class Header extends React.Component {
           <title>{siteTitle}</title>
           <body
             className={
-              (userTheme || theme) === 'light' ? 'light-theme' : 'dark-theme'
+              (userTheme || defaultTheme) === 'light'
+                ? 'light-theme'
+                : 'dark-theme'
             }
           />
         </Helmet>
@@ -102,7 +106,7 @@ Header.propTypes = {
   siteTitle: PropTypes.string,
   siteLogo: PropTypes.object,
   logoText: PropTypes.string,
-  theme: PropTypes.string,
+  defaultTheme: PropTypes.string,
   mainMenu: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,

@@ -42,7 +42,7 @@ description: String,
 copyrights: String,
 author: String,
 logo: Shape { // you can place your own logo
-  src: String,
+  src: String, // default dir is `/static/`
   alt: String,
 },
 logoText: String, // change default Hello Friend logo
