@@ -44,7 +44,11 @@ const Layout = ({ children }) => (
         <div className="content">{children}</div>
         <footer>
           {data.site.siteMetadata.copyrights ? (
-            data.site.siteMetadata.copyrights
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data.site.siteMetadata.copyrights,
+              }}
+            />
           ) : (
             <>
               <span className="footerCopyrights">
