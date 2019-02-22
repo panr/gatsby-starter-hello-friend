@@ -6,8 +6,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  * @author Rose Pritchard
  */
 
-code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"],
+pre[class*="language-"] > code {
 	color: #a9a9b3;
 	background: none;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -36,17 +36,9 @@ pre[class*="language-"] {
 	overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
 pre[class*="language-"] {
 	background: #1a1a1d !important;
 	border-radius: 8px;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
 }
 
 .token.comment,

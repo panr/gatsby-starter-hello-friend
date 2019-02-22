@@ -137,8 +137,9 @@ figure {
 }
 
 code {
-  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
   font-feature-settings: normal;
+  font-weight: normal;
   background: var(--light-background-secondary);
   padding: 1px 6px;
   margin: 0 2px;
@@ -189,7 +190,6 @@ blockquote {
     margin-bottom: 0;
   }
 }
-
 
 table {
   table-layout: fixed;

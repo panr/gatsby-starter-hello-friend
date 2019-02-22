@@ -27,7 +27,7 @@ const Post = ({
       <div className={style.postContent}>
         <h1>{excerpt ? <Link to={path}>{title}</Link> : title}</h1>
         <div className={style.meta}>
-          {date} {author && <>— written by {author}</>}
+          {date} {author && <>— Written by {author}</>}
         </div>
         {coverImage && (
           <Img
