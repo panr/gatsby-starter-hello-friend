@@ -56,6 +56,12 @@ mainMenu: arrayOf(Shape { // main menu items
 })
 ```
 
+## Hidden dummy post file
+
+Starter contains a dummy hidden placeholder file in `posts` called `.features-placeholder.md`. I added it there, because I don't have idea how to make GraphQL queries work well for all custom fields even if you don't use them. For example `coverImage` — basic query "requires" this field at least in one file.
+
+If you know how to fix it, please help me with this ;-)
+
 ## How to contribute
 
 If you spot any bugs, please use [Issue Tracker](https://github.com/panr/gatsby-starter-hello-friend/issues) or if you want to add a new feature directly please create a new [Pull Request](https://github.com/panr/gatsby-starter-hello-friend/pulls).
