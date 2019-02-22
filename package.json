@@ -1,8 +1,7 @@
 {
   "name": "gatsby-starter-hello-friend",
-  "private": true,
   "description": "A simple starter for Gatsby. That's it.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Radek Kozieł <radoslaw.koziel@gmail.com>",
   "keywords": [
     "gatsby",
@@ -17,8 +16,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
+    "dev": "gatsby clean && gatsby develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
@@ -38,8 +36,8 @@
     "gatsby-transformer-sharp": "^2.1.8",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0"
   },
   "devDependencies": {
