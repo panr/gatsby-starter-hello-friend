@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import SEO from '../components/seo'
 import Layout from '../components/layout'
 import Post from '../components/post'
 import Navigation from '../components/navigation'
@@ -11,34 +12,37 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
   } = data
 
   return (
-    <Layout>
-      {posts.map(({ node }) => {
-        const {
-          id,
-          excerpt: autoExcerpt,
-          frontmatter: { title, date, path, author, coverImage, excerpt },
-        } = node
+    <>
+      <SEO />
+      <Layout>
+        {posts.map(({ node }) => {
+          const {
+            id,
+            excerpt: autoExcerpt,
+            frontmatter: { title, date, path, author, coverImage, excerpt },
+          } = node
 
-        return (
-          <Post
-            key={id}
-            title={title}
-            date={date}
-            path={path}
-            author={author}
-            coverImage={coverImage}
-            excerpt={excerpt || autoExcerpt}
-          />
-        )
-      })}
+          return (
+            <Post
+              key={id}
+              title={title}
+              date={date}
+              path={path}
+              author={author}
+              coverImage={coverImage}
+              excerpt={excerpt || autoExcerpt}
+            />
+          )
+        })}
 
-      <Navigation
-        previousPath={previousPagePath}
-        previousLabel="Newer posts"
-        nextPath={nextPagePath}
-        nextLabel="Older posts"
-      />
-    </Layout>
+        <Navigation
+          previousPath={previousPagePath}
+          previousLabel="Newer posts"
+          nextPath={nextPagePath}
+          nextLabel="Older posts"
+        />
+      </Layout>
+    </>
   )
 }
 
