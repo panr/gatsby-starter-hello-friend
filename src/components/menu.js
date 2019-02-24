@@ -80,6 +80,7 @@ const Menu = ({
             style={{ color: 'inherit' }}
             onClick={onToggleMobileMenu}
             type="button"
+            aria-label="Menu"
           >
             <Icon style={{ cursor: 'pointer' }} size={24} d={menuIcon} />
           </button>
@@ -94,6 +95,7 @@ const Menu = ({
                 className={style.subMenuTrigger}
                 onClick={onToggleSubMenu}
                 type="button"
+                aria-label="Menu"
               >
                 {menuMoreText || 'Menu'}{' '}
                 <span className={style.menuArrow}>></span>
@@ -115,6 +117,7 @@ const Menu = ({
         className={style.themeToggle}
         onClick={onChangeTheme}
         type="button"
+        aria-label="Theme toggle"
       >
         <Icon style={{ cursor: 'pointer' }} size={24} d={toggleIcon} />
       </button>

@@ -11,7 +11,6 @@ const Header = props => {
   const {
     siteLogo,
     logoText,
-    siteTitle,
     mainMenu,
     mainMenuItems,
     menuMoreText,
@@ -38,7 +37,6 @@ const Header = props => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle}</title>
         <body
           className={
             (userTheme || defaultTheme) === 'light'
@@ -81,7 +79,6 @@ const Header = props => {
 }
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
   siteLogo: PropTypes.object,
   logoText: PropTypes.string,
   defaultTheme: PropTypes.string,

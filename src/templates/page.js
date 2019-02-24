@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+
+import SEO from '../components/seo'
 import Layout from '../components/layout'
 import Post from '../components/post'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const {
-    frontmatter: { title, date, path, author, coverImage },
+    frontmatter: { title, date, path, author, coverImage, excerpt },
+    excerpt: autoExcerpt,
     id,
     html,
   } = data.markdownRemark
@@ -14,6 +17,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <SEO title={title} description={excerpt || autoExcerpt} />
       <Post
         key={id}
         title={title}
@@ -58,6 +62,7 @@ export const pageQuery = graphql`
       }
       id
       html
+      excerpt
     }
   }
 `
