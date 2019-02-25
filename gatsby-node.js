@@ -10,6 +10,7 @@ exports.createPages = ({ actions, graphql }) => {
   return graphql(`
     {
       allMarkdownRemark(
+        filter: { frontmatter: { title: { ne: "Features placeholder" } } }
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {
@@ -23,7 +24,12 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
-      posts: allFile(filter: { sourceInstanceName: { eq: "posts" } }) {
+      posts: allFile(
+        filter: {
+          sourceInstanceName: { eq: "posts" }
+          name: { ne: ".features-placeholder" }
+        }
+      ) {
         edges {
           node {
             childMarkdownRemark {
