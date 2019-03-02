@@ -11,7 +11,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     frontmatter: { title, date, path, author, coverImage, excerpt },
     excerpt: autoExcerpt,
     id,
-    html,
+    htmlAst,
   } = data.markdownRemark
   const { next, previous } = pageContext
 
@@ -25,7 +25,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         path={path}
         author={author}
         coverImage={coverImage}
-        html={html}
+        htmlAst={htmlAst}
         previousPost={previous}
         nextPost={next}
       />
@@ -61,7 +61,7 @@ export const pageQuery = graphql`
         }
       }
       id
-      html
+      htmlAst
       excerpt
     }
   }

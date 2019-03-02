@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
+import rehypeReact from 'rehype-react'
 import Navigation from './navigation'
+import CustomDemo from './custom/demo'
 
 import style from '../styles/post.module.css'
 
@@ -13,7 +15,7 @@ const Post = ({
   coverImage,
   author,
   excerpt,
-  html,
+  htmlAst,
   previousPost,
   nextPost,
 }) => {
@@ -21,6 +23,11 @@ const Post = ({
   const previousLabel = previousPost && previousPost.frontmatter.title
   const nextPath = nextPost && nextPost.frontmatter.path
   const nextLabel = nextPost && nextPost.frontmatter.title
+
+  const renderAst = new rehypeReact({
+    createElement: React.createElement,
+    components: { 'demo': CustomDemo },
+  }).Compiler;
 
   return (
     <div className={style.post}>
@@ -46,7 +53,7 @@ const Post = ({
           </>
         ) : (
           <>
-            <div dangerouslySetInnerHTML={{ __html: html }} />
+            {renderAst(htmlAst)}
             <Navigation
               previousPath={previousPath}
               previousLabel={previousLabel}
@@ -67,7 +74,7 @@ Post.propTypes = {
   coverImage: PropTypes.object,
   author: PropTypes.string,
   excerpt: PropTypes.string,
-  html: PropTypes.string,
+  htmlAst: PropTypes.object,
   previousPost: PropTypes.object,
   nextPost: PropTypes.object,
 }
