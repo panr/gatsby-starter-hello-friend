@@ -22,6 +22,9 @@ const Post = ({
   const nextPath = nextPost && nextPost.frontmatter.path
   const nextLabel = nextPost && nextPost.frontmatter.title
 
+  const isPlaceholder =
+    coverImage?.childImageSharp.fluid.sizes.indexOf('1px') !== -1
+
   return (
     <div className={style.post}>
       <div className={style.postContent}>
@@ -31,7 +34,7 @@ const Post = ({
         <div className={style.meta}>
           {date} {author && <>— Written by {author}</>}
         </div>
-        {coverImage && (
+        {coverImage && !isPlaceholder && (
           <Img
             fluid={coverImage.childImageSharp.fluid}
             className={style.coverImage}

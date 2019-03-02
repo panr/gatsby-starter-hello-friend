@@ -13,6 +13,9 @@ extends:
   - airbnb
   - prettier
 
+plugins:
+  - react-hooks
+
 rules:
   # best practices
   arrow-parens:
@@ -49,6 +52,9 @@ rules:
   import/no-extraneous-dependencies: 0
   import/prefer-default-export: 0
   object-curly-newline: 0
+  operator-linebreak:
+    - 2
+    - after
 
   react/jsx-filename-extension: 0
   react/jsx-one-expression-per-line: 0
@@ -57,6 +63,8 @@ rules:
   react/no-array-index-key: 0
   react/no-unescaped-entities: 0
   react/destructuring-assignment: 0
+
+  react-hooks/rules-of-hooks: error
 
 globals:
   document: true

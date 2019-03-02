@@ -98,3 +98,24 @@ exports.createPages = ({ actions, graphql }) => {
     return sortedPages
   })
 }
+
+exports.onCreateNode = async function({ node, getNodes }) {
+  const allNodes = getNodes()
+  const posts = allNodes.filter(n => n.internal.type === 'MarkdownRemark')
+  const atLeastOnePostHasCoverImage = posts.filter(
+    post => post.frontmatter.coverImage,
+  ).length
+  const coverImagePlaceholder = atLeastOnePostHasCoverImage ?
+    null :
+    '../images/placeholder/image-placeholder.png'
+
+  if (node.internal.type === 'MarkdownRemark') {
+    node.frontmatter = {
+      ...node.frontmatter,
+      coverImage: node.frontmatter.coverImage || coverImagePlaceholder,
+      excerpt: node.frontmatter.excerpt || '',
+    }
+  }
+
+  return node
+}
