@@ -87,3 +87,17 @@ Traffic RUDY attack nodes anonymous IP network code two-step verification system
 `youtube: xIBiJ_SzJTA`
 
 Tor boot up backup anonymous bonsoir IRC website. Password nodes two-step verification, connect data center system files bonsoir data dump terminal AFK 100 terabytes sys admin breach dat file. Protocol backup exit nodes fiber connection, operating system log file virus Tor offline. Password data center two-step verification disconnect IRC terminal. Tor IRC cyber security AFK protocol traffic disconnect. Code exit nodes IRC cyber security nodes worm.
+
+#### Custom React Components
+
+Custom React components can be defined in Markdown like this:
+
+`<demo greeting="stranger"></demo>`
+
+<demo greeting="stranger"></demo>
+
+There are some caveats though:
+
+- Always add closing tags in markdown. No auto-closing allowed!
+- Attribute names are always lowercased. Unfortunately, camelCase is not possible.
+- Attributes are always strings so you have to parse them in your component.
