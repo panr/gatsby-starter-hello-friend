@@ -102,9 +102,8 @@ exports.createPages = ({ actions, graphql }) => {
 exports.onCreateNode = async function({ node, getNodes }) {
   const allNodes = getNodes()
   const posts = allNodes.filter(n => n.internal.type === 'MarkdownRemark')
-  const atLeastOnePostHasCoverImage = posts.filter(
-    post => post.frontmatter.coverImage,
-  ).length
+  const atLeastOnePostHasCoverImage =
+    posts.filter(post => post.frontmatter.coverImage).length > 0
   const coverImagePlaceholder = atLeastOnePostHasCoverImage ?
     null :
     '../images/placeholder/image-placeholder.png'
