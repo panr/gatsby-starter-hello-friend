@@ -43,6 +43,16 @@
   margin-bottom: 30px;
 }
 
+.tags {
+  margin-top: 10px;
+  opacity: .5;
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .readMore {
   display: inline-block;
   text-decoration: none;

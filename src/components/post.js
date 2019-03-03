@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Navigation from './navigation'
+import { toKebabCase } from '../helpers'
 
 import style from '../styles/post.module.css'
 
@@ -13,6 +14,7 @@ const Post = ({
   coverImage,
   author,
   excerpt,
+  tags,
   html,
   previousPost,
   nextPost,
@@ -33,13 +35,24 @@ const Post = ({
         </h1>
         <div className={style.meta}>
           {date} {author && <>— Written by {author}</>}
+          {tags ? (
+            <div className={style.tags}>
+              {tags.map(tag => (
+                <Link to={`/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
+                  <span className={style.tag}>#{tag}</span>
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
+
         {coverImage && !isPlaceholder && (
           <Img
             fluid={coverImage.childImageSharp.fluid}
             className={style.coverImage}
           />
         )}
+
         {excerpt ? (
           <>
             <p>{excerpt}</p>
@@ -71,6 +84,7 @@ Post.propTypes = {
   author: PropTypes.string,
   excerpt: PropTypes.string,
   html: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
   previousPost: PropTypes.object,
   nextPost: PropTypes.object,
 }

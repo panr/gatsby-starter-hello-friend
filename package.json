@@ -60,7 +60,8 @@
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
     "postcss-url": "^8.0.0",
-    "prettier": "^1.15.2"
+    "prettier": "^1.15.2",
+    "rambdax": "^1.8.0"
   },
   "repository": {
     "type": "git",
