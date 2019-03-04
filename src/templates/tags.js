@@ -6,7 +6,12 @@ import Layout from '../components/layout'
 import Post from '../components/post'
 import Navigation from '../components/navigation'
 
-const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
+import '../styles/layout.css'
+
+const Tags = ({
+  data,
+  pageContext: { nextPagePath, previousPagePath, tag },
+}) => {
   const {
     allMarkdownRemark: { edges: posts },
   } = data
@@ -15,6 +20,10 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
     <>
       <SEO />
       <Layout>
+        <div className="infoBanner">
+          Posts with tag: <span>#{tag}</span>
+        </div>
+
         {posts.map(({ node }) => {
           const {
             id,
@@ -37,8 +46,8 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
               date={date}
               path={path}
               author={author}
-              coverImage={coverImage}
               tags={tags}
+              coverImage={coverImage}
               excerpt={excerpt || autoExcerpt}
             />
           )
@@ -55,7 +64,7 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
   )
 }
 
-Index.propTypes = {
+Tags.propTypes = {
   data: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
     nextPagePath: PropTypes.string,
@@ -64,9 +73,9 @@ Index.propTypes = {
 }
 
 export const postsQuery = graphql`
-  query($limit: Int!, $skip: Int!) {
+  query($limit: Int!, $skip: Int!, $tag: String!) {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "//posts//" } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
@@ -96,4 +105,4 @@ export const postsQuery = graphql`
   }
 `
 
-export default Index
+export default Tags

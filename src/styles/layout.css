@@ -248,6 +248,7 @@ button, input, textarea {
   justify-content: center;
   margin: 50px auto;
   width: 100%;
+  max-width: 800px;;
 
   @media (--phone) {
     margin-top: 0;
@@ -266,6 +267,23 @@ hr {
 
   .dark-theme & {
     background: var(--dark-border-color);
+  }
+}
+
+.infoBanner {
+  text-align: left;
+  margin: 20px 0 40px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: calc(100% - 40px);
+  background: var(--light-background-secondary);
+
+  .dark-theme & {
+    background: var(--dark-background-secondary);
+  }
+
+  span {
+    font-weight: bold;
   }
 }
 

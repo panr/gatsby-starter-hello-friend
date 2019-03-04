@@ -40,7 +40,17 @@
 
 .meta {
   font-size: 1rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.tags {
+  margin-top: 10px;
+  opacity: .5;
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .readMore {

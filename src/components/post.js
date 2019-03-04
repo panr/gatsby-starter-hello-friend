@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import rehypeReact from 'rehype-react'
 import Navigation from './navigation'
+import { toKebabCase } from '../helpers'
 import CustomDemo from './custom/demo'
 
 import style from '../styles/post.module.css'
@@ -16,6 +17,7 @@ const Post = ({
   author,
   excerpt,
   htmlAst,
+  tags,
   previousPost,
   nextPost,
 }) => {
@@ -23,6 +25,9 @@ const Post = ({
   const previousLabel = previousPost && previousPost.frontmatter.title
   const nextPath = nextPost && nextPost.frontmatter.path
   const nextLabel = nextPost && nextPost.frontmatter.title
+
+  const isPlaceholder =
+    coverImage?.childImageSharp.fluid.sizes.indexOf('1px') !== -1
 
   const renderAst = new rehypeReact({
     createElement: React.createElement,
@@ -37,13 +42,24 @@ const Post = ({
         </h1>
         <div className={style.meta}>
           {date} {author && <>— Written by {author}</>}
+          {tags ? (
+            <div className={style.tags}>
+              {tags.map(tag => (
+                <Link to={`/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
+                  <span className={style.tag}>#{tag}</span>
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
-        {coverImage && (
+
+        {coverImage && !isPlaceholder && (
           <Img
             fluid={coverImage.childImageSharp.fluid}
             className={style.coverImage}
           />
         )}
+
         {excerpt ? (
           <>
             <p>{excerpt}</p>
@@ -75,6 +91,7 @@ Post.propTypes = {
   author: PropTypes.string,
   excerpt: PropTypes.string,
   htmlAst: PropTypes.object,
+  tags: PropTypes.arrayOf(PropTypes.string),
   previousPost: PropTypes.object,
   nextPost: PropTypes.object,
 }
