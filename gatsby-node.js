@@ -16,7 +16,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
 
   return graphql(`
     {
-      allMarkdownRemark(
+      allMdx(
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {
@@ -42,7 +42,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
     }
 
     const {
-      allMarkdownRemark: { edges: markdownPages },
+      allMdx: { edges: markdownPages },
       site: { siteMetadata },
     } = result.data
 
@@ -55,7 +55,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
 
     const posts = allNodes.filter(
       ({ internal, fileAbsolutePath }) =>
-        internal.type === 'MarkdownRemark' &&
+        internal.type === 'Mdx' &&
         fileAbsolutePath.indexOf('/posts/') !== -1,
     )
 
@@ -79,7 +79,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
 
       createPage({
         path: node.frontmatter.path,
-        component: pageTemplate,
+        component: node.fileAbsolutePath,
         context: {
           type: getType(node),
           next: isNextSameType ? next : null,
@@ -128,7 +128,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
 exports.onCreateNode = ({ node, getNodes }) => {
   const allNodes = getNodes()
   const posts = allNodes.filter(
-    ({ internal }) => internal.type === 'MarkdownRemark',
+    ({ internal }) => internal.type === 'Mdx',
   )
   const atLeastOnePostHasCoverImage =
     posts.filter(({ frontmatter }) => frontmatter.coverImage).length > 0
@@ -136,7 +136,7 @@ exports.onCreateNode = ({ node, getNodes }) => {
     null :
     '../images/placeholder/image-placeholder.png'
 
-  if (node.internal.type === 'MarkdownRemark') {
+  if (node.internal.type === 'Mdx') {
     node.frontmatter = {
       ...node.frontmatter,
       coverImage: node.frontmatter.coverImage || coverImagePlaceholder,

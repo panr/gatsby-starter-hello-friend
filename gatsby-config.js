@@ -123,5 +123,15 @@ module.exports = {
         icon: `src/images/hello-icon.png`,
       },
     },
+    {
+      resolve: `gatsby-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        defaultLayouts: {
+          posts: require.resolve('./src/components/layout.js'),
+          default: require.resolve('./src/components/layout.js'),
+        }
+      },
+    },
   ],
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import rehypeReact from 'rehype-react'
 import Navigation from './navigation'
 import { toKebabCase } from '../helpers'
 import CustomDemo from './custom/demo'
@@ -16,7 +15,7 @@ const Post = ({
   coverImage,
   author,
   excerpt,
-  htmlAst,
+  html,
   tags,
   previousPost,
   nextPost,
@@ -28,11 +27,6 @@ const Post = ({
 
   const isPlaceholder =
     coverImage?.childImageSharp.fluid.sizes.indexOf('1px') !== -1
-
-  const renderAst = new rehypeReact({
-    createElement: React.createElement,
-    components: { 'demo': CustomDemo },
-  }).Compiler;
 
   return (
     <div className={style.post}>
@@ -69,7 +63,7 @@ const Post = ({
           </>
         ) : (
           <>
-            {renderAst(htmlAst)}
+            <div dangerouslySetInnerHTML={{ __html: html }} />
             <Navigation
               previousPath={previousPath}
               previousLabel={previousLabel}
@@ -90,7 +84,7 @@ Post.propTypes = {
   coverImage: PropTypes.object,
   author: PropTypes.string,
   excerpt: PropTypes.string,
-  htmlAst: PropTypes.object,
+  html: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
   previousPost: PropTypes.object,
   nextPost: PropTypes.object,

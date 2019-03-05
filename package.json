@@ -21,9 +21,12 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
+    "@mdx-js/mdx": "^0.20.0",
+    "@mdx-js/tag": "^0.18.0",
     "gatsby": "^2.0.76",
     "gatsby-awesome-pagination": "^0.3.3",
     "gatsby-image": "^2.0.20",
+    "gatsby-mdx": "^0.3.6-ci.306",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-postcss": "^2.0.2",
@@ -38,8 +41,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-helmet": "^5.2.0",
-    "rehype-react": "^3.1.0"
+    "react-helmet": "^5.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.2.0",
