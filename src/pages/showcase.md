@@ -5,11 +5,6 @@ author: "Hello Robot"
 path: "/showcase"
 ---
 
-import CustomDemo from '../components/custom/demo'
-
-<CustomDemo greeting="friend" />
-
-
 ## Header 2 
  
 Backup two-step verification breach, anonymous terminal traffic worm virus reboot fsociety dat file. Traffic fsociety malware 100 terabytes system hack, delete brute-force cyber security fiber connection connect code worm wipe. Cyber security off the grid delete IP decrypt, **nodes connect password 100 terabytes RUDY attack malicious code** rootkit gigabit speed. Tor connect network, intercepting traffic off the grid IP protocol password. 
@@ -96,13 +91,9 @@ Tor boot up backup anonymous bonsoir IRC website. Password nodes two-step verifi
 #### Custom React Components 
  
 Custom React components can be defined in Markdown like this: 
+
+`<CustomDemo greeting="friend" />`
  
-`<demo greeting="stranger"></demo>` 
- 
-<demo greeting="stranger"></demo> 
- 
-There are some caveats though: 
- 
-- Always add closing tags in markdown. No auto-closing allowed! 
-- Attribute names are always lowercased. Unfortunately, camelCase is not possible. 
-- Attributes are always strings so you have to parse them in your component. 
+import CustomDemo from '../components/custom/demo'
+
+<CustomDemo greeting="friend" />

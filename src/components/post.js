@@ -4,7 +4,6 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Navigation from './navigation'
 import { toKebabCase } from '../helpers'
-import CustomDemo from './custom/demo'
 
 import style from '../styles/post.module.css'
 
