@@ -37,14 +37,6 @@ module.exports = {
   },
   plugins: [
     `babel-preset-gatsby`,
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -78,19 +70,15 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-mdx`,
       options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-embed-video',
-            options: {
-              related: false,
-              noIframeBorder: true,
-            },
-          },
+        extensions: [`.mdx`, `.md`],
+        defaultLayouts: {
+          posts: require.resolve('./src/components/layout.js'),
+          default: require.resolve('./src/components/layout.js'),
+        },
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -111,6 +99,16 @@ module.exports = {
         ],
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -121,16 +119,6 @@ module.exports = {
         theme_color: `#292a2d`,
         display: `minimal-ui`,
         icon: `src/images/hello-icon.png`,
-      },
-    },
-    {
-      resolve: `gatsby-mdx`,
-      options: {
-        extensions: [`.mdx`, `.md`],
-        defaultLayouts: {
-          posts: require.resolve('./src/components/layout.js'),
-          default: require.resolve('./src/components/layout.js'),
-        }
       },
     },
   ],
