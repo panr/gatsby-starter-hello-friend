@@ -8,7 +8,7 @@ import Navigation from '../components/navigation'
 
 const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
   const {
-    allMarkdownRemark: { edges: posts },
+    allMdx: { edges: posts },
   } = data
 
   return (
@@ -65,7 +65,7 @@ Index.propTypes = {
 
 export const postsQuery = graphql`
   query($limit: Int!, $skip: Int!) {
-    allMarkdownRemark(
+    allMdx(
       filter: { fileAbsolutePath: { regex: "//posts//" } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit

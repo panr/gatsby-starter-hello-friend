@@ -14,8 +14,8 @@ const Post = ({
   coverImage,
   author,
   excerpt,
-  tags,
   html,
+  tags,
   previousPost,
   nextPost,
 }) => {
