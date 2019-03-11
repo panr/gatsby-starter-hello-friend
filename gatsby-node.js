@@ -103,7 +103,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
 
     forEach(tag => {
       const postsWithTag = posts.filter(post =>
-        post.frontmatter.tags.indexOf(tag),
+        post.frontmatter.tags.indexOf(tag) !== -1
       )
 
       paginate({
