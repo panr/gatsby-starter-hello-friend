@@ -24,9 +24,6 @@ const Post = ({
   const nextPath = nextPost && nextPost.frontmatter.path
   const nextLabel = nextPost && nextPost.frontmatter.title
 
-  const isPlaceholder =
-    coverImage?.childImageSharp.fluid.sizes.indexOf('1px') !== -1
-
   return (
     <div className={style.post}>
       <div className={style.postContent}>
@@ -46,7 +43,7 @@ const Post = ({
           ) : null}
         </div>
 
-        {coverImage && !isPlaceholder && (
+        {coverImage && (
           <Img
             fluid={coverImage.childImageSharp.fluid}
             className={style.coverImage}

@@ -1,18 +1,18 @@
 const { paginate } = require('gatsby-awesome-pagination')
-const { forEach, uniq } = require('rambdax')
+const { forEach, uniq, filter, not, isNil, flatMap } = require('rambdax')
 const path = require('path')
 const { toKebabCase } = require('./src/helpers')
 
 const pageTypeRegex = /src\/(.*?)\//
 const getType = node => node.fileAbsolutePath.match(pageTypeRegex)[1]
 
+const pageTemplate = path.resolve(`./src/templates/page.js`)
+const indexTemplate = path.resolve(`./src/templates/index.js`)
+const tagsTemplate = path.resolve(`./src/templates/tags.js`)
+
 exports.createPages = ({ actions, graphql, getNodes }) => {
   const { createPage } = actions
   const allNodes = getNodes()
-
-  const pageTemplate = path.resolve(`./src/templates/page.js`)
-  const indexTemplate = path.resolve(`./src/templates/index.js`)
-  const tagsTemplate = path.resolve(`./src/templates/tags.js`)
 
   return graphql(`
     {
@@ -25,6 +25,7 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
             frontmatter {
               path
               title
+              tags
             }
             fileAbsolutePath
           }
@@ -89,21 +90,15 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
     }, sortedPages)
 
     // Create tag pages
-    let tags = []
-
-    forEach(post => {
-      const { frontmatter } = post
-
-      if (frontmatter.tags) {
-        tags = tags.concat(frontmatter.tags)
-      }
-    }, posts)
-
-    tags = uniq(tags)
+    const tags = filter(
+      tag => not(isNil(tag)),
+      uniq(flatMap(post => post.frontmatter.tags, posts)),
+    )
 
     forEach(tag => {
-      const postsWithTag = posts.filter(post =>
-        post.frontmatter.tags.indexOf(tag) !== -1
+      const postsWithTag = posts.filter(
+        post =>
+          post.frontmatter.tags && post.frontmatter.tags.indexOf(tag) !== -1,
       )
 
       paginate({
@@ -125,25 +120,22 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
   })
 }
 
-exports.onCreateNode = ({ node, getNodes }) => {
-  const allNodes = getNodes()
-  const posts = allNodes.filter(
-    ({ internal }) => internal.type === 'MarkdownRemark',
-  )
-  const atLeastOnePostHasCoverImage =
-    posts.filter(({ frontmatter }) => frontmatter.coverImage).length > 0
-  const coverImagePlaceholder = atLeastOnePostHasCoverImage ?
-    null :
-    '../images/placeholder/image-placeholder.png'
-
-  if (node.internal.type === 'MarkdownRemark') {
-    node.frontmatter = {
-      ...node.frontmatter,
-      coverImage: node.frontmatter.coverImage || coverImagePlaceholder,
-      excerpt: node.frontmatter.excerpt || '',
-      tags: node.frontmatter.tags || [],
+exports.sourceNodes = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter!
     }
-  }
 
-  return node
+    type Frontmatter {
+      title: String!
+      author: String
+      date: Date!
+      path: String!
+      tags: [String!]
+      excerpt: String
+      coverImage: File
+    }
+  `
+  createTypes(typeDefs)
 }
