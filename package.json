@@ -1,17 +1,17 @@
 {
-  "name": "gatsby-starter-hello-friend",
-  "description": "A simple starter for Gatsby. That's it.",
-  "version": "0.2.0",
-  "author": "Radek Kozieł <radoslaw.koziel@gmail.com>",
+  "name": "svdoscience",
+  "description": "Website for svdoscience.com",
+  "version": "1.0.0",
+  "author": "Joel Ramos <joel.m.ramos@me.com>",
   "keywords": [
     "gatsby",
     "minimal",
-    "starter",
     "blog",
-    "theme",
+    "software development",
     "dark",
     "light",
-    "personal site"
+    "personal site",
+    "test automation"
   ],
   "license": "MIT",
   "scripts": {
@@ -65,9 +65,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/panr/gatsby-starter-hello-friend"
-  },
-  "bugs": {
-    "url": "https://github.com/panr/gatsby-starter-hello-friend/issues"
+    "url": "https://github.com/svdo-science/svdoscience.com"
   }
 }
