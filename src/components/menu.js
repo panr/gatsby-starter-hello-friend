@@ -10,11 +10,23 @@ const MainMenu = ({ mainMenu, mainMenuItems, isMobileMenu }) => {
   const menu = mainMenu.slice(0)
   !isMobileMenu && menu.splice(mainMenuItems)
 
-  return menu.map((menuItem, index) => (
-    <li key={index}>
-      <Link to={menuItem.path}>{menuItem.title}</Link>
-    </li>
-  ))
+  return menu.map((menuItem, index) => {
+    const urlRegex = /^(https?:\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$/im
+    const isAbsoluteUrl = menuItem.path.match(urlRegex);
+    if (isAbsoluteUrl) {
+      return (
+        <li key={index}>
+          <a href={menuItem.path} target='_top'>{menuItem.title}</a>
+        </li>
+      )
+    } else {
+      return (
+        <li key={index}>
+          <Link to={menuItem.path}>{menuItem.title}</Link>
+        </li>
+      )
+    }
+  })
 }
 
 const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu }) => {
